@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static "assets/css/register_page.css" %}">
+{% endblock style %}
+
+{% block title %}
+    <title>iChat - Вход</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <form action="{% url "profile:login" %}" method="POST">
+      {% csrf_token %}
+      <h1>Login</h1>
+      {{ form }}
+      <input type="submit" value="Login">
+      <p>Haven't signed up yet?</p>
+      <a href="{% url "profile:register" %}">Sign up</a>
+      <a href="{% url "main_page" %}">Home</a>
+    </form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock content %}
