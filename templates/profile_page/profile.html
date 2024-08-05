@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+   <title>iChat - Профиль</title>
+{% endblock title %}
+
+{% block content %}
+   {% if user.is_authenticated %}
+       <img src="
+       {% if user.image %}
+       {{ user.image.url }}
+       {% else %}
+       {% static "assets/img/unknown-user.jpg" %}
+       {% endif %}" class="img-fluid rounded-circle" style="width: 200px;" alt="Изображение пользователя">
+       <h1>{{ user.username }}</h1>
+       <a href="{% url "profile:logout" %}">Logout</a>
+       <a href="{% url "main_page" %}">Home<a>
+       <br>
+       <br>
+       <h3>Описание</h3>
+       <form id="description-form" method="POST" action="{% url 'profile:process-profile-description' user.id %}">
+       {% csrf_token %}
+       <textarea name="description" maxlength="200" id="description" style="height: 120px; width: 400px;">{% if user.description %}{{ user.description }}{% endif %}</textarea>
+       <br>
+       <br>
+       <input type="submit" class="--bs-success-text-emphasis" value="Сохранить описание">
+       </form>
+       <br>
+       <br>
+       <br>
+       <h6>Загрузить изображение профиля</h6>
+       <br>
+       <form action="{% url "profile:process-profile-photo" user.id %}" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+       <input type="file" accept="image/png, image/jpg, image/jpeg" id="file" name="file">
+       <br>
+       <br>
+       <br>
+       <div class="button">
+       <input type="submit" class="--bs-success-text-emphasis" value="Сохранить изображение">
+       </div>
+   {% else %}
+       <img src="{% static "assets/img/unknown-user.jpg" %}" class="img-fluid rounded-circle" style="width: 200px;">
+       <h1>Guest</h1>
+       <a href="{% url "profile:login" %}">Login</a>
+       <a href="{% url "main_page" %}">Home<a>
+   {% endif %}
+{% endblock content %}

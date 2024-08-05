@@ -11,7 +11,13 @@
 
     {% if request.user.is_authenticated %}
     <div class="profile-img">
-      <img src="{% static "assets/img/my-profile-img.jpg" %}" alt="" class="img-fluid rounded-circle">
+      <img src="
+      {% if request.user.image %}
+      {{ request.user.image.url }}
+      {% else %}
+      {% static "assets/img/unknown-user.jpg" %}
+      {% endif %}
+      " alt="Изображение пользователя" class="img-fluid rounded-circle">
     </div>
 
     <a href="{% url "profile:logout" %}" class="logo d-flex align-items-center justify-content-center">
@@ -74,8 +80,8 @@
       <img src="{% static "assets/img/hero-bg.jpg" %}" alt="" data-aos="fade-in" class="">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <h2>Daniil Moskalenko</h2>
-        <p>I'm <span class="typed" data-typed-items="Developer">Junior Python Developer</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+        <h2>Daniil Moskalenko and Rin Miss</h2>
+        <p>We're <span class="typed" data-typed-items="Developers">Junior Python Developers</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
       </div>
 
     </section><!-- /Hero Section -->
@@ -91,10 +97,11 @@
 
         <div class="row gy-4 justify-content-center">
           <div class="col-lg-4">
-            <img src="{% static "assets/img/my-profile-img.jpg" %}" class="img-fluid" alt="">
+            <img src="{% static "assets/img/justcr1si.jpg" %}" class="img-fluid" alt="">
+            <img src="{% static "assets/img/rin_miss.jpg" %}" class="img-fluid" alt="">
           </div>
           <div class="col-lg-8 content">
-            <h2>Junior Python Developer &amp; Web Developer.</h2>
+            <h2>Junior Python Developers &amp; Web Developers.</h2>
             <p class="fst-italic py-3">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
               magna aliqua.
