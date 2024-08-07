@@ -24,6 +24,7 @@ from .settings import DEBUG
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', include('profile_page.urls', namespace='profile')),
+    path('feed/', include('feed.urls', namespace='feed')),
     path('', views.main_page, name='main_page'),
 ]
 

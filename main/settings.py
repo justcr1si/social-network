@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     'main',
     'profile_page',
-
+    'feed',
 ]
 
 MIDDLEWARE = [
