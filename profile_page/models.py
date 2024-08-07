@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.templatetags.static import static
 
 
 class User(AbstractUser):
@@ -19,3 +20,8 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    def get_image(self):
+        if self.image:
+            return self.image.url
+        return static('assets/img/unknown-user.jpg')

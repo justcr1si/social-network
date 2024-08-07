@@ -7,15 +7,11 @@
 
 {% block content %}
    {% if user.is_authenticated %}
-       <img src="
-       {% if user.image %}
-       {{ user.image.url }}
-       {% else %}
-       {% static "assets/img/unknown-user.jpg" %}
-       {% endif %}" class="img-fluid rounded-circle" style="width: 200px;" alt="Изображение пользователя">
+       <img src="{{ user.get_image }}" class="img-fluid rounded-circle" style="width: 200px;" alt="Изображение пользователя">
        <h1>{{ user.username }}</h1>
        <a href="{% url "profile:logout" %}">Logout</a>
        <a href="{% url "main_page" %}">Home<a>
+       <a href="{% url "feed:feed" %}">Feed</a>
        <br>
        <br>
        <h3>Описание</h3>
@@ -39,11 +35,15 @@
        <br>
        <div class="button">
        <input type="submit" class="--bs-success-text-emphasis" value="Сохранить изображение">
+       </form>
+
+       <input type="submit" value="Удалить изображение" action="{% url "profile:delete-image-handler" user.id %}">
        </div>
    {% else %}
        <img src="{% static "assets/img/unknown-user.jpg" %}" class="img-fluid rounded-circle" style="width: 200px;">
        <h1>Guest</h1>
        <a href="{% url "profile:login" %}">Login</a>
        <a href="{% url "main_page" %}">Home<a>
+       <a href="{% url "feed:feed" %}">Feed</a>
    {% endif %}
 {% endblock content %}

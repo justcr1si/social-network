@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
+from django.templatetags.static import static
 
 from .forms import UserLoginForm, UserRegistrationForm
 from .models import User
@@ -53,21 +54,28 @@ def logout_user(request):
     return redirect('main_page')
 
 
-def profile(request):
+def profile(request, user_id=None):
+    if user_id:
+        user = User.objects.get(pk=user_id)
+        return render(request, 'profile_page/profile.html', {'user': user})
     return render(request, 'profile_page/profile.html')
 
 
+@login_required(login_url='/profile/login/')
 def process_profile_photo(request, user_id):
     if request.method == 'POST':
         user = User.objects.get(id=user_id)
-        image = request.POST.get('file')
+        image = request.FILES.get('file')
         if image:
             user.image = image
-            user.save()
+        else:
+            user.image = static("assets/img/unknown-user.jpg")
+        user.save()
 
-    return render(request, 'profile_page/profile.html')
+    return redirect('profile:profile')
 
 
+@login_required(login_url='/profile/login/')
 def process_profile_description(request, user_id):
     if request.method == 'POST':
         user = User.objects.get(id=user_id)
@@ -76,4 +84,13 @@ def process_profile_description(request, user_id):
             user.description = description
             user.save()
 
-    return render(request, 'profile_page/profile.html')
+    return redirect('profile:profile')
+
+
+@login_required(login_url='/profile/login/')
+def delete_user_image(request, user_id):
+    user = User.objects.get(pk=user_id)
+    if user.image:
+        user.image.delete()
+        user.save()
+    return redirect('profile:profile')

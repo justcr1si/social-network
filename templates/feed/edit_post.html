@@ -2,23 +2,23 @@
 {% load static %}
 
 {% block title %}
-    <title>iChat - Создание поста</title>
+    <title>iChat - Изменение поста</title>
 {% endblock title %}
 
 {% block content %}
-    <h1>Create post<h1>
+    <h1>Edit post<h1>
     <br>
     <img src="{{ user.get_image }}" class="img-fluid rounded-circle" style="width: 200px;" alt="Изображение пользователя">
-    <p>{{ user.username }}, create post!</p>
+    <p>{{ user.username }}, edit post!</p>
     <a href="{% url "feed:feed" %}">Feed</a>
     <a href="{% url "main_page" %}">Home</a>
-    <a href="{% url "profile:profile" user.id%}">Profile</a>
+    <a href="{% url "profile:profile" user.id %}">Profile</a>
     <br>
     <br>
-    <form action="{% url "feed:create-post" user.id %}" method="POST">
+    <form action="{% url "feed:edit-post" post.id %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <br>
-    <input type="submit" value="Создать пост">
+    <input type="submit" value="Изменить пост">
     </form>
 {% endblock content %}

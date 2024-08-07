@@ -11,13 +11,7 @@
 
     {% if request.user.is_authenticated %}
     <div class="profile-img">
-      <img src="
-      {% if request.user.image %}
-      {{ request.user.image.url }}
-      {% else %}
-      {% static "assets/img/unknown-user.jpg" %}
-      {% endif %}
-      " alt="Изображение пользователя" class="img-fluid rounded-circle">
+      <img src="{{ request.user.get_image }}" alt="Изображение пользователя" class="img-fluid rounded-circle">
     </div>
 
     <a href="{% url "profile:logout" %}" class="logo d-flex align-items-center justify-content-center">
@@ -45,9 +39,13 @@
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="{% url "profile:profile" %}"><i class="bi bi-person navicon active"></i> Profile settings</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url "profile:profile" request.user.id %}"><i class="bi bi-person navicon active"></i> Profile settings</a></li>
+        {% else %}
+        <li><a href="{% url "profile:profile"%}"><i class="bi bi-person navicon active"></i> Profile settings</a></li>
+        {% endif %}
         <li><a href="{% url "main_page" %}"><i class="bi bi-house navicon"></i>Home</a></li>
-        <li><a href="{% url "feed:feed" %}"><i class="bi bi-file-earmark-text navicon"></i> Feed</a></li>
+        <li><a href="{% url "feed:feed" %}" {% if request.user %}request.user.id{% endif %}><i class="bi bi-file-earmark-text navicon"></i> Feed</a></li>
         <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
         <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li>
         <li class="dropdown"><a href="#"><i class="bi bi-menu-button navicon"></i> <span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
