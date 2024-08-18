@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>iChat - Комментарии к посту</title>
+{% endblock title %}
+
+{% block content %}
+    <img src="{% if user.is_authenticated %}{{ user.get_image }}{% else %}{% static "assets/img/unknown-user.jpg" %}{% endif %}" class="img-fluid rounded-circle" style="width: 200px;" alt="Изображение пользователя">
+    {% if user.is_authenticated %}
+        <h2>{{ user.username }}, leave a comment!</h2>
+    {% else %}
+    <br>
+    <br>
+    {% endif %}
+    <a href="{% url "feed:feed" %}">Feed</a>
+    <a href="{% url "main_page" %}">Home</a>
+    {% if user.is_authenticated %}
+        <a href="{% url "profile:profile" user.id %}">Profile</a>
+    {% else %}
+        <a href="{% url "profile:login" %}">Login</a>
+    {% endif %}
+    <br>
+    <br>
+    <img src="{{ post.user.get_image }}" class="img-fluid rounded-circle" style="width: 75px;" alt="Изображение пользователя">
+    <h4>{{ post.user.username }} - owner of this post</h4>
+    <br>
+    <h2>{{ post.topic }}</h2>
+    <p>{{ post.text }}</p>
+    <br>
+    <h5>Comments ({{ post.comments.count }} available)</h5>
+    <ul>
+    {% if user.is_authenticated %}
+        <a href="{% url "comments:leave-comment" post.id user.id %}">Leave a comment</a>
+    {% endif %}
+    {% for comment in comments %}
+        <li>
+            <hr>
+            <img src="{{ comment.user.get_image }}" class="img-fluid rounded-circle" style="width: 50px;" alt="Изображение пользователя">
+            <p>@{{ comment.user.username }}</p>
+            <br>
+            <p>{{ comment.text }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>iChat - Комментарии к посту</title>
+{% endblock title %}
+
+{% block content %}
+    <img src="{{ user.get_image }}" class="img-fluid rounded-circle" style="width: 200px;" alt="Изображение пользователя">
+    <h2>{{ user.username }}, leave a comment!</h2>
+    <a href="{% url "feed:feed" %}">Feed</a>
+    <a href="{% url "main_page" %}">Home</a>
+    <a href="{% url "profile:profile" user.id %}">Profile</a>
+    <h4>{{ post.user.username }} - owner of this post</h4>
+    <br>
+    <br>
+    <h2>{{ post.topic }}</h2>
+    <p>{{ post.text }}</p>
+    <br>
+    <form method="POST" action="{% url "comments:leave-comment" post.id user.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Создать комментарий">
+    </form>
+    </ul>
+
+{% endblock content %}

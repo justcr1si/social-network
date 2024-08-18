@@ -1,0 +1,62 @@
+[
+    {
+        "model": "profile_page.user",
+        "pk": 1,
+        "fields": {
+            "last_login": "2024-08-07T14:39:34.656Z",
+            "is_superuser": true,
+            "first_name": "",
+            "last_name": "",
+            "email": "justcr1si@yandex.ru",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2024-08-05T09:21:17Z",
+            "username": "justcr1si",
+            "password": "pbkdf2_sha256$600000$ANik6dJ5r9QdxwqGhX3ENu$dqOiXpNz3l3C6qLemW9FeFs0UW2H88n+688XjO7xOew=",
+            "description": "Я люблю джанго! Я люблю качалку!",
+            "image": "profile-images/photo_2024-07-01_22-01-42.jpg",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "profile_page.user",
+        "pk": 4,
+        "fields": {
+            "last_login": "2024-08-07T12:28:29.347Z",
+            "is_superuser": false,
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-08-07T10:49:19.825Z",
+            "username": "vasilisa",
+            "password": "pbkdf2_sha256$600000$2lWYZzjDhQm8gDoJDyHmrG$Ekq+5xLXguPB0gE8q6Clo/hAw60iEHAFjZ0KjVS/jNk=",
+            "description": "Я люблю кушать!!",
+            "image": "profile-images/photo_2024-08-07_13-49-53.jpg",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "profile_page.user",
+        "pk": 5,
+        "fields": {
+            "last_login": "2024-08-08T04:16:10.272Z",
+            "is_superuser": false,
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-08-07T11:55:06.233Z",
+            "username": "test",
+            "password": "pbkdf2_sha256$600000$AFZRN5EXTNE3JhWGqvWIQW$FqJ/l9TSn84y9VugTkJa4dXLleUxC6h1EDG6joVwIzw=",
+            "description": null,
+            "image": "/media/static/assets/img/unknown-user.jpg",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]

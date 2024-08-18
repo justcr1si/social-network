@@ -16,22 +16,25 @@
         <a href="{% url "feed:create-post" user.id %}">Create post</a>
         <a href="{% url "profile:profile" user.id %}">Profile</a>
       {% else %}
-        <a href="{% url "profile:profile" %}">Profile</a>
+        <a href="{% url "profile:login" %}">Login</a>
       {% endif %}
       <a href="{% url "main_page" %}">Home</a>
       
       <ul>
       {% for post in posts %}
-            <li>
-                <p>@{{ post.user }}<p>
-                {% if user == post.user %}
-                <a href="{% url "feed:edit-post" post.id user.id %}">Edit</a>
-                <a href="{% url "feed:delete-post" post.id %}">Delete</a>
-                {% endif %}
-                <h3>{{ post.topic }}</h3>
-                <p> {{ post.text }} </p>
-            </li>
-      {% endfor %}
+        <li>
+          <hr>
+          <p>@{{ post.user }}<p>
+          {% if user == post.user %}
+          <a href="{% url "feed:edit-post" post.id user.id %}">Edit</a>
+          <a href="{% url "feed:delete-post" post.id %}">Delete</a>
+          {% endif %}
+          <h3>{{ post.topic }}</h3>
+          <h4>posted: {{ post.updated|timesince }} ago</h4>
+          <p>{{ post.text }}</p>
+          <p>{{ post.comments.count }} <a href="{% url "comments:view-comments" post.id %}">comments</a> available</p>
+      </li>
+        {% endfor %}
       </ul>
 
     </div>

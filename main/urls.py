@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', include('profile_page.urls', namespace='profile')),
     path('feed/', include('feed.urls', namespace='feed')),
+    path('feed/comments/', include('comments.urls', namespace='comments')),
     path('', views.main_page, name='main_page'),
 ]
 

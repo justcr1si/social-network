@@ -1,0 +1,32 @@
+[
+    {
+        "model": "feed.post",
+        "pk": 8,
+        "fields": {
+            "user": 1,
+            "topic": "How I like Maria",
+            "text": "I really love Maria yeah!",
+            "likes": null
+        }
+    },
+    {
+        "model": "feed.post",
+        "pk": 9,
+        "fields": {
+            "user": 1,
+            "topic": "Also i love sushi",
+            "text": "That's really good dish",
+            "likes": null
+        }
+    },
+    {
+        "model": "feed.post",
+        "pk": 11,
+        "fields": {
+            "user": 4,
+            "topic": "Найти друга",
+            "text": "Рыженького котика",
+            "likes": null
+        }
+    }
+]

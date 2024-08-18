@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'main',
     'profile_page',
     'feed',
+    'comments',
 ]
 
 MIDDLEWARE = [
@@ -129,10 +130,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'media/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'media/static',
 ]
 
 INTERNAL_IPS = [
