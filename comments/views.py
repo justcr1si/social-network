@@ -39,3 +39,33 @@ def leave_comment(request, post_id, user_id=None):
     }
 
     return render(request, 'comments/leave_comment.html', context)
+
+
+@login_required(login_url='/profile/login/')
+def delete_comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('comments:view-comments', post_id=comment.post.id)
+
+
+@login_required(login_url='/profile/login/')
+def edit_comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    if request.method == 'POST':
+        form = CommentForm(data=request.POST, initial={'text': comment.text})
+        if form.is_valid():
+            text = request.POST.get('text')
+            if text:
+                comment.text = text
+                comment.save()
+                return redirect('comments:view-comments',
+                                post_id=comment.post.id)
+    else:
+        form = CommentForm(initial={'text': comment.text})
+
+    context = {
+        'comment': comment,
+        'form': form,
+    }
+
+    return render(request, 'comments/edit_comment.html', context)

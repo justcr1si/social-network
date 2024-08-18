@@ -13,3 +13,4 @@ class Post(models.Model):
         db_table = 'post'
         verbose_name = 'поста'
         verbose_name_plural = 'постов'
+        ordering = ['-updated']

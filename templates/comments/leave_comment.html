@@ -11,6 +11,9 @@
     <a href="{% url "feed:feed" %}">Feed</a>
     <a href="{% url "main_page" %}">Home</a>
     <a href="{% url "profile:profile" user.id %}">Profile</a>
+    <br>
+    <br>
+    <img src="{{ post.user.get_image }}" class="img-fluid rounded-circle" style="width: 75px;" alt="Изображение пользователя">
     <h4>{{ post.user.username }} - owner of this post</h4>
     <br>
     <br>

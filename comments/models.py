@@ -15,3 +15,4 @@ class Comment(models.Model):
         db_table = 'comment'
         verbose_name = 'комментария'
         verbose_name_plural = 'комментариев'
+        ordering = ['-updated']

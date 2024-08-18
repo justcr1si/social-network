@@ -38,6 +38,11 @@
             <hr>
             <img src="{{ comment.user.get_image }}" class="img-fluid rounded-circle" style="width: 50px;" alt="Изображение пользователя">
             <p>@{{ comment.user.username }}</p>
+            {% if user.id == comment.user.id %}
+                <a href="{% url "comments:edit-comment" comment.id %}">Edit</a>
+                <a href="{% url "comments:delete-comment" comment.id %}">Delete</a>
+            {% endif %}
+            <h6>posted: {{ comment.updated|timesince }} ago</h6>
             <br>
             <p>{{ comment.text }}</p>
         </li>

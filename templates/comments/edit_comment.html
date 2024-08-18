@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>iChat - Изменение поста</title>
+{% endblock title %}
+
+{% block content %}
+    <img src="{% if user.is_authenticated %}{{ user.get_image }}{% else %}{% static "assets/img/unknown-user.jpg" %}{% endif %}" class="img-fluid rounded-circle" style="width: 200px;" alt="Изображение пользователя">
+    {% if user.is_authenticated %}
+        <h2>{{ user.username }}, edit the comment!</h2>
+    {% else %}
+    <br>
+    <br>
+    {% endif %}
+    <a href="{% url "feed:feed" %}">Feed</a>
+    <a href="{% url "main_page" %}">Home</a>
+    {% if user.is_authenticated %}
+        <a href="{% url "profile:profile" user.id %}">Profile</a>
+    {% else %}
+        <a href="{% url "profile:login" %}">Login</a>
+    {% endif %}
+    <br>
+    <br>
+    <img src="{{ comment.post.user.get_image }}" class="img-fluid rounded-circle" style="width: 75px;" alt="Изображение пользователя">
+    <h4>{{ comment.post.user.username }} - owner of this post</h4>
+    <br>
+    <hr>
+    <img src="{{ comment.user.get_image }}" class="img-fluid rounded-circle" style="width: 50px;" alt="Изображение пользователя">
+    <p>@{{ comment.user.username }}</p>
+    <h6>posted: {{ comment.updated|timesince }} ago</h6>
+    <br>
+    <form method="POST" action="{% url "comments:edit-comment" comment.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <input type="submit" value="Изменить пост">
+    </form>
+
+{% endblock content %}
